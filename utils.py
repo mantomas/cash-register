@@ -18,8 +18,11 @@ def read_backup():
         myfile.close
     else: # if file don't exist backup = 0
         backup_money = 0
+    
+    if backup_money == '': # make sure if file is empty that it returns zero
+        backup_money = 0    
         
-    backup_coins = int(backup_money) # make sure backup_couns value is integer
+    backup_coins = int(backup_money) # make sure backup_coins value is integer
     return backup_coins
 
 def write_backup(self):

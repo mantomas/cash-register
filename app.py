@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import tkinter as tk
 import utils
 
@@ -45,14 +46,14 @@ class hlavni_okno:
         self.e11 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
         self.e12 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
     # entry field for special value input    
-        self.e13 = tk.Entry(self.panel2, validate = 'key', width=8)
+        self.e13 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
         self.e14 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
         self.e15 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
         self.e16 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
     # entry field for the correct state of the cash register   
         self.e17 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8)
     # entry for actual_result to place its value
-        self.e18 = tk.Entry(self.panel2, width=8, font = "Helvetica 26",)
+        self.e18 = tk.Entry(self.panel2, validate = 'key', validatecommand = vcmd, width=8, font = "Helvetica 26")
     # placing entry fields in a grid   
         self.e1.grid(row=0, column=1, padx=10, pady=2)
         self.e2.grid(row=1, column=1, padx=10, pady=2)
@@ -71,8 +72,9 @@ class hlavni_okno:
         self.e14.grid(row=13, column=1, padx=10, pady=2)
         self.e15.grid(row=14, column=1, padx=10, pady=2)
         self.e16.grid(row=15, column=1, padx=10, pady=2)
-        self.e17.grid(row=16, column=1, padx=10, pady=2) # reference value moved a bit down
-        self.e18.grid(row=17, column=2, padx=10, pady=2) # actual result value moved a bit down
+        self.e17.grid(row=16, column=1, padx=10, pady=2) # reference value
+    # actual result    
+        self.e18.grid(row=17, column=2, padx=10, pady=2) 
     # button area
         self.button3 = tk.Button(self.panel2, text = "Přepiš drobné", width=20, command = self.write_backup)
         self.button3.grid(row=12, column=2) # write backup_coins
@@ -146,13 +148,10 @@ class hlavni_okno:
     def validate(self, action, index, value_if_allowed,
         prior_value, text, validation_type, trigger_type, widget_name):
         if(action=='1'):
-            if text in '0123456789': # allowed input
-                try:
-                    int(value_if_allowed) # input must be integer
-                    return True
-                except ValueError: # no allowed input, no entry
-                    return False
-            else:
+            try:
+                int(value_if_allowed) # input must be integer
+                return True
+            except ValueError: # no allowed input, no entry
                 return False
         else:
             return True
@@ -160,7 +159,6 @@ class hlavni_okno:
         money = self.secti_penize()
         utils.save_result(self.e17.get(), money)
         master.destroy()
-
 backup_coins = utils.read_backup()
 if __name__ == "__main__":
     master = tk.Tk()
