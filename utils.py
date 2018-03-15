@@ -4,7 +4,7 @@ and easier to develop.
 Contain functions to read and write files
 and will be extended.
 """
-import os.path # used to check if file exist
+import os # used to check if file exist
 import datetime # give access to actual date and time functions
 
 def read_backup(): 
@@ -12,8 +12,9 @@ def read_backup():
     read backup_money value from a file
     and if there is none it is created
     """
-    if os.path.isfile("backup_money.txt"): # check if file exist
-        myfile = open('backup_money.txt', 'r') # open to read
+    
+    if os.path.isfile(os.path.join(os.path.dirname(__file__), 'data/backup_money.txt')): # check if file exist
+        myfile = open(os.path.join(os.path.dirname(__file__), 'data/backup_money.txt'), 'r') # open to read
         backup_money = myfile.read() # takes the value of backup
         myfile.close
     else: # if file don't exist backup = 0
@@ -29,7 +30,7 @@ def write_backup(self):
     """
     rewrites value of backup_money
     """
-    myfile = open('backup_money.txt', 'w+')
+    myfile = open(os.path.join(os.path.dirname(__file__), 'data/backup_money.txt'), 'w+')
     myfile.write(self.e13.get())
     myfile.close
     
@@ -42,6 +43,6 @@ def save_result(stav_kasy, rozdil_trzby):
     """
     now = datetime.datetime.now()
     datum = now.strftime("%d.%m.%Y %H:%M")
-    myfile = open('archive.txt', 'a')
+    myfile = open(os.path.join(os.path.dirname(__file__), 'data/archive.txt'), 'a')
     myfile.write("%-19s%-11s%-7s%-14s%-7s%-1s" % (datum, 'Stav kasy: ', str(stav_kasy), 'Rozdíl tržby: ', str(rozdil_trzby), '\n'))
     myfile.close
