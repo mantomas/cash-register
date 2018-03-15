@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Utilities to keep main app small
 and easier to develop.
