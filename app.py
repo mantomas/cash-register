@@ -235,7 +235,7 @@ class hlavni_okno:
 backup_coins = utils.read_backup()
 if __name__ == "__main__":
     master = tk.Tk()
-    master.title("Výčetka 1.0")
+    master.title("Výčetka 1.2")
     hlavni_okno(master)
     master.mainloop()
 
