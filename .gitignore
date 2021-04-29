@@ -2,3 +2,6 @@
 /trzba.dat
 /backup_money.txt
 /archive.txt
+/__pycache__
+/.project
+/.pydevproject
